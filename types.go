@@ -184,9 +184,9 @@ func (ctx *Context) encodeOctetString(value reflect.Value) ([]byte, error) {
 		// Invalid type or element type
 		return nil, wrongType("array or slice of bytes", value)
 	}
-	if kind == reflect.Slice {
-		return value.Interface().([]byte), nil
-	}
+	//if kind == reflect.Slice {
+	//	return value.Interface().([]byte), nil
+	//}
 	data := make([]byte, value.Len())
 	for i := 0; i < value.Len(); i++ {
 		data[i] = value.Index(i).Interface().(byte)
