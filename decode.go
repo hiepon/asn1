@@ -375,6 +375,9 @@ func (ctx *Context) getExpectedFieldElements(value reflect.Value) ([]expectedFie
 func (ctx *Context) getRawValuesFromBytes(data []byte, max int) ([]*rawValue, error) {
 	// Raw values
 	rawValues := []*rawValue{}
+	if max == 0 {
+		return rawValues, nil
+	}
 	reader := bytes.NewBuffer(data)
 	for i := 0; i < max; i++ {
 		// Parse an Asn.1 element

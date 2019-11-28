@@ -94,6 +94,13 @@ func (ctx *Context) encodeValue(value reflect.Value, opts *fieldOptions) (raw *r
 		encoder = ctx.encodeNull
 	}
 
+	nullVal := reflect.ValueOf(Null{})
+	if objType.ConvertibleTo(nullVal.Type()) {
+		value = nullVal
+		raw.Tag = tagNull
+		encoder = ctx.encodeNull
+	}
+
 	if encoder == nil {
 		// Generic types:
 		switch value.Kind() {
